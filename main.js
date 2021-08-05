@@ -1,5 +1,5 @@
-var predicition_1="";
-var predicition_2="";
+var prediction_1="";
+var prediction_2="";
 Webcam.set({
     width:350,
     height:300,
@@ -14,16 +14,16 @@ function take_snapshot(){
     document.getElementById("result").innerHTML='<img id="captured_image" src="'+data_uri+'"/>';
 });
 }
-classifier = ml5.imageClassifier('https://teachablemachine.withgoogle.com/models/KD2T6SPCd/',modelLoaded);
+classifier = ml5.imageClassifier('https://teachablemachine.withgoogle.com/models/WdyNod8GU/model.json',modelLoaded);
 function modelLoaded(){
     console.log("modelLoaded")
 }
 function speak(){
     var synch=window.speechSynthesis;
-    speak_data_1="The first predicition is"+predicition_1;
-    speak_data_2="The second predicition is"+predicition_2;
+    speak_data_1="The first prediction is"+prediction_1;
+    speak_data_2="The second prediction is"+prediction_2;
 var utterThis=new SpeechSynthesisisUtterance (speak_data_1 + speak_data_2);
-SpeechSynthesis.speak(utterThis);
+synch.speak(utterThis);
 }
 function check(){
     img=document.getElementById("captured_image");
@@ -36,26 +36,26 @@ function check(){
                   console.log(results);
                   document.getElementById("result_emotion_name").innerHTML=results[0].label;
                   document.getElementById("result_emotion_name2").innerHTML=results[1].label;
-                  predicition_1=results[0].label;
-                  predicition_2=results[1].label;
+                  prediction_1=results[0].label;
+                  prediction_2=results[1].label;
                   speak();
                   if(results[0].label=="happy"){
-                    document.getElementById("update_emoji").innerHTML="😊";
+                    document.getElementById("update_emoji").innerHTML="&#128522";
                   }
                   if(results[0].label=="sad"){
-                    document.getElementById("update_emoji").innerHTML="😔";
+                    document.getElementById("update_emoji").innerHTML="&#128532";
                   }
                   if(results[0].label=="angry"){
-                    document.getElementById("update_emoji").innerHTML="😡";
+                    document.getElementById("update_emoji").innerHTML="&#128458";
                   }
                   if(results[1].label=="happy"){
-                    document.getElementById("update_emoji").innerHTML="😊";
+                    document.getElementById("update_emoji").innerHTML="&#128522";
                   }
                   if(results[1].label=="sad"){
-                    document.getElementById("update_emoji").innerHTML="😔";
+                    document.getElementById("update_emoji").innerHTML="&#128532";
                   }
                   if(results[1].label=="angry"){
-                    document.getElementById("update_emoji").innerHTML="😡";
+                    document.getElementById("update_emoji").innerHTML="&#128458";
                   }
               }
             }
